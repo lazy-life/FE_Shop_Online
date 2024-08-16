@@ -121,6 +121,7 @@ const EditProductPage = ({ match }) => {
             const newItem = {
                 'productDetailName': detailName,
                 'productDetailPrice': detailPrice,
+            
                 'detailStock': stock,
             };
             setItems([...items, newItem]);
