@@ -18,7 +18,11 @@ function LoginPage({ history }) {
 
     useEffect(() => {
         if (userInfo) {
-            history.push('/') // homepage
+            if(userInfo.userRole === 4){
+                history.push('/ship')
+            }else{
+                history.push('/') // homepage
+            }
         }
     }, [history, userInfo])
 

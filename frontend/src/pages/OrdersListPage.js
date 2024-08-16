@@ -67,6 +67,15 @@ function OrdersListPage() {
                 console.log(err);
             })
     }
+    
+    const HandleDone = (id) => {
+        axios.post(`${apiRoot}Status/${id}/7`)
+            .then(res => {
+                GetAllOrdersUsID()
+            }).catch(err => {
+                console.log(err);
+            })
+    }
 
     if (userInfo && tokenError === "Request failed with status code 401") {
         alert("Session expired, please login again.")
@@ -128,7 +137,8 @@ function OrdersListPage() {
                                 }}>
                                     <b>{new Date(orderObj.orders.orderDate).toLocaleDateString()}</b>
                                     {orderObj.orders.orderStatus === 1 && <b>Đã đặt</b>}
-                                    {orderObj.orders.orderStatus === 3 && <b>Đang giao</b>}
+                                    {orderObj.orders.orderStatus === 3 && <b>Đang chuẩn bị hàng</b>}
+                                    {orderObj.orders.orderStatus === 6 && <b>Đang giao</b>}
                                     {orderObj.orders.orderStatus === 4 && <b>Đã giao</b>}
                                     {orderObj.orders.orderStatus === 5 && <b>Đã Huỷ</b>}
                                     <b>{orderObj.orders.addressDetail}</b>
@@ -138,6 +148,12 @@ function OrdersListPage() {
                                         borderRadius: '.5rem',
                                         padding: '.5rem 2rem'
                                     }} onClick={() => HandleCancel(orderObj.orders.orderId)}><b>Huỷ</b></button>}
+                                    {orderObj.orders.orderStatus === 4 && <button style={{
+                                        border: 'none',
+                                        backgroundColor: '#ff6075',
+                                        borderRadius: '.5rem',
+                                        padding: '.5rem 2rem'
+                                    }} onClick={() => HandleDone(orderObj.orders.orderId)}><b>Đã nhận hàng</b></button>}
                                 </div>
                                 <div style={{
                                     borderRadius: '0 0 .5rem .5rem',

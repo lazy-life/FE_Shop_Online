@@ -121,7 +121,6 @@ const EditProductPage = ({ match }) => {
             const newItem = {
                 'productDetailName': detailName,
                 'productDetailPrice': detailPrice,
-                'detailPriceDiscount': detailPriceDiscount,
                 'detailStock': stock,
             };
             setItems([...items, newItem]);
@@ -174,8 +173,7 @@ const EditProductPage = ({ match }) => {
 
         const config = {
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`
+                "Content-Type": "application/json"
             }
         }
 
@@ -513,14 +511,14 @@ const EditProductPage = ({ match }) => {
                         </Form.Control>
                     </Form.Group>
 
-                    <button style={{
+                    <p style={{
                         height: '50px',
                         padding: '.5rem 3rem',
                         border: 'none',
                         borderRadius: '.5rem',
                         backgroundColor: '#1a71ff',
                         color: 'white'
-                    }} onClick={() => handleAddDetail()}>Thêm</button>
+                    }} onClick={() => handleAddDetail()}>Thêm</p>
                 </div>
                 <Form.Group controlId="category">
                     <Form.Label>

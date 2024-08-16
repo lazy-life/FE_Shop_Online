@@ -132,6 +132,7 @@ const ManageMoneyPage = () => {
                                             {orderObj.orders.orderStatus === 3 && <b>Đang giao</b>}
                                             {orderObj.orders.orderStatus === 4 && <b>Đã giao</b>}
                                             {orderObj.orders.orderStatus === 5 && <b>Đã Huỷ</b>}
+                                            {orderObj.orders.orderStatus === 7 && <b>Đã nhận hàng</b>}
                                             <b>{orderObj.orders.addressDetail}</b>
                                         </div>
                                         <div style={{

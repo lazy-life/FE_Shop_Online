@@ -35,6 +35,18 @@ function NavBar() {
         );
     };
 
+    const handleLogo = () => {
+        if (userInfo) {
+            if (userInfo.userRole === 4) {
+                history.push('/ship')
+            } else {
+                history.push('/') // homepage
+            }
+        } else {
+            history.push('/')
+        }
+    }
+
     return (
         <header style={{
             position: 'fixed',
@@ -46,19 +58,20 @@ function NavBar() {
             top: 0,
             backgroundColor: '#fb6445'
         }}>
-            <Navbar bg="Light" variant="dark" expand="lg" collapseOnSelect style={{ backgroundColor: '#ffffff', display: 'flex', justifyContent: 'space-between',
+            <Navbar bg="Light" variant="dark" expand="lg" collapseOnSelect style={{
+                backgroundColor: '#ffffff', display: 'flex', justifyContent: 'space-between',
                 boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
-             }}>
+            }}>
                 <Container>
-                    <LinkContainer to="/" style={{ width: '15%', marginRight: '40px' }}>
+                    <div onClick={() => handleLogo()} style={{ width: '15%', marginRight: '40px', cursor: 'pointer' }}>
                         <Navbar.Brand> <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo" height={'40px'} /></Navbar.Brand>
-                    </LinkContainer>
+                    </div>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto" style={{ width: '65%' }}>
                             <span className="" style={{ width: '100%' }}>
-                            {userInfo && userInfo.userRole !== 1 && <SearchBarForProducts />}
-                            {!userInfo &&<SearchBarForProducts />}
+                                {userInfo && (userInfo.userRole !== 1 && userInfo.userRole !== 4) && <SearchBarForProducts />}
+                                {!userInfo && <SearchBarForProducts />}
                             </span>
                         </Nav>
 
@@ -66,7 +79,7 @@ function NavBar() {
 
                         {userInfo ?
                             <div style={{ width: '30%', display: 'flex', justifyContent: 'space-around', marginLeft: '40px' }}>
-                                {userInfo && userInfo.userRole === 1 ?
+                                {userInfo && (userInfo.userRole === 1 || userInfo.userRole === 4) ?
                                     <></>
                                     :
                                     <LinkContainer to="/stripe-card-details/">
@@ -79,10 +92,10 @@ function NavBar() {
                                 }
                                 <NavDropdown className="navbar-nav text-capitalize" id='username'
                                     title={<CustomTitle userName={userInfo.userName} />}>
-                                    <LinkContainer to="/account">
+                                    {(userInfo && userInfo.userRole !== 4) ? <LinkContainer to="/account">
                                         <NavDropdown.Item>Cài đặt tài khoản</NavDropdown.Item>
-                                    </LinkContainer>
-                                    {(userInfo && userInfo.userRole !== 1) ? <LinkContainer to="/all-orders/">
+                                    </LinkContainer> : ''}
+                                    {(userInfo && userInfo.userRole !== 1 && userInfo.userRole !== 4) ? <LinkContainer to="/all-orders/">
                                         <NavDropdown.Item>Đơn hàng</NavDropdown.Item>
                                     </LinkContainer> : ''}
                                     <NavDropdown.Item onClick={logoutHandler}>

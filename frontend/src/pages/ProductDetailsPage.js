@@ -322,7 +322,7 @@ function ProductDetailsPage({ history, match }) {
                                             padding: '.3rem 1rem',
                                             borderRadius: '.2rem',
                                         }}
-                                    >{pricePro} vnd</p>
+                                    >{pricePro.toLocaleString('en-US')} vnd</p>
                                 </span>
 
                                 <div style={{ display: 'flex', margin: '1rem 1rem' }}>
