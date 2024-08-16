@@ -302,7 +302,7 @@ function ProductDetailsPage({ history, match }) {
                                             padding: '.3rem 1rem',
                                             borderRadius: '.2rem',
                                         }}
-                                    ><del>{productOriginPrice} vnd</del></p>
+                                    ><del>{productOriginPrice.toLocaleString('en-US')} VND </del></p>
                                 </span>}
                                 <span style={{
                                     display: "flex",
@@ -322,7 +322,7 @@ function ProductDetailsPage({ history, match }) {
                                             padding: '.3rem 1rem',
                                             borderRadius: '.2rem',
                                         }}
-                                    >{pricePro} vnd</p>
+                                    >{pricePro.toLocaleString('en-US')} VND </p>
                                 </span>
 
                                 <div style={{ display: 'flex', margin: '1rem 1rem' }}>
