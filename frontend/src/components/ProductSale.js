@@ -63,7 +63,7 @@ function ProductSale({ product }) {
                                     <del>{product.productPrice} vnd</del>
                                 </p>
                                 <p style={{ margin: 0, color: 'red' }}>
-                                    {product.productSalePrice} vnd
+                                    {product.productSalePrice.toLocaleString('en-US')} vnd
                                 </p>
                             </>
                         }

@@ -29,23 +29,26 @@ function NavBar() {
 
     useEffect(() => {
         if (userInfo) {
-          const fetchCardData = () => {
-            axios.get(`${apiRoot}User/GetAllCard/${userInfo.userId}`)
-              .then(res => {
-                setCradNumber(res.data);
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          };
-    
-          fetchCardData(); // Gọi hàm ngay khi component mount
-    
-          const intervalId = setInterval(fetchCardData, 2000); // Gọi lại sau mỗi 2 giây
-    
-          return () => clearInterval(intervalId); // Xóa interval khi component unmount
+            const fetchCardData = () => {
+                axios.get(`${apiRoot}User/GetAllCard/${userInfo.userId}`)
+                    .then(res => {
+                        setCradNumber(res.data);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            };
+
+            // Trì hoãn lần gọi đầu tiên sau 2 giây
+            const timeoutId = setTimeout(() => {
+                fetchCardData();
+                const intervalId = setInterval(fetchCardData, 2000); // Gọi lại sau mỗi 2 giây
+                return () => clearInterval(intervalId); // Xóa interval khi component unmount
+            }, 2000);
+
+            return () => clearTimeout(timeoutId); // Xóa timeout nếu component unmount trước khi hết 2 giây
         }
-      }, []);
+    }, []);
 
     const CustomTitle = ({ userName }) => {
         return (

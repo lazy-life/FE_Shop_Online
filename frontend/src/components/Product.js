@@ -52,7 +52,7 @@ function Product({ product }) {
                             }}>Chỉnh sửa</p>
                             :
                             <p style={{ margin: 0, color: 'red' }}>
-                                {product.productPrice} vnd
+                                {product.productPrice.toLocaleString('en-US')} vnd
                             </p>
                         }
                     </Link>

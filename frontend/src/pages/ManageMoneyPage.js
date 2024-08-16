@@ -305,6 +305,17 @@ const ManageMoneyPage = () => {
                                             height: '3rem'
                                         }}>Đã giao</button>
                                     }
+                                    {or.orderStatus === 7 &&
+                                        <button style={{
+                                            backgroundColor: '#6460ff',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '.5rem',
+                                            padding: '.5rem 3rem',
+                                            boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
+                                            height: '3rem'
+                                        }}>Đã nhận hàng</button>
+                                    }
                                     {or.orderStatus === 5 &&
                                         <button style={{
                                             backgroundColor: '#ff6075',
