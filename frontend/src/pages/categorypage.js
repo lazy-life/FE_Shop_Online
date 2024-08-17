@@ -39,6 +39,7 @@ function CategoryPage() {
     const [url5, setUrl5] = useState(null);
     const [images, setImages] = useState([]);
     const [image, setImage] = useState(null)
+    const [showAddPro, setShowAddPro] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
 
@@ -98,6 +99,7 @@ function CategoryPage() {
     }
 
     const HandleAddCategory = async () => {
+        setShowAddPro(true)
         const data5 = await postFile(file5);
         let form_data = {
             "categoryName": inputValue,
@@ -119,6 +121,7 @@ function CategoryPage() {
         })
         setUrl5('')
         setInputValue('')
+        setShowAddPro(false)
     }
 
 
@@ -164,6 +167,35 @@ function CategoryPage() {
     }
     return (
         <div>
+            {showAddPro && <div style={{
+                position: 'fixed',
+                backgroundColor: 'rgba(4, 15, 19, 0.5)',
+                width: '100%',
+                height: '100vh',
+                zIndex: 30,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <svg xmlns="http://www.w3.org/2000/svg" style={{
+                    width: '100px',
+                    height: '100px',
+                    margin: '20px',
+                    display: 'inline-block'
+                }} version="1.1" id="L9" x="0px" y="0px"
+                    viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlSpace="preserve">
+                    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                        <animateTransform
+                            attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            dur="1s"
+                            from="0 50 50"
+                            to="360 50 50"
+                            repeatCount="indefinite" />
+                    </path>
+                </svg>
+            </div>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <span style={{ display: "flex", justifyContent: 'center' }}>
                 <h5>Đang tải sản phẩm</h5>

@@ -73,7 +73,7 @@ const ManageMoneyPage = () => {
     }
 
     return (
-        <>
+        <div>
             {show && <div style={{
                 position: 'fixed', zIndex: '80',
                 backgroundColor: 'rgb(31, 31, 31, .5)',
@@ -87,29 +87,24 @@ const ManageMoneyPage = () => {
                 <div style={{
                     backgroundColor: 'white',
                     width: '70%',
-                    minHeight: '20vh',
+                    height: '50vh',
                     borderRadius: '.5rem',
-                    padding: '1rem'
+                    padding: '1rem',
                 }}>
                     <div style={{
+                        width: '90%',
                         display: 'flex',
-                        justifyContent: 'space-around'
+                        justifyContent: 'center',
+                        margin: '0 5%',
+                        overflowY: 'auto',
                     }}>
                         <h5 style={{ textAlign: 'center', marginBottom: '.5rem' }}>Thông tin chi tiết đơn hàng</h5>
-                        <button style={{
-                            border: 'none',
-                            borderRadius: '.5rem',
-                            backgroundColor: '#c53b57',
-                            color: 'white',
-                            padding: '.5rem 1rem',
-                            cursor: 'pointer'
-                        }} onClick={() => {
-                            setShow(false)
-                        }}>Đóng</button>
                     </div>
                     {ordersData.length > 0 &&
                         <div style={{
+                            width: '80%',
                             padding: '2rem 0',
+                            height: '80%',
                             backgroundColor: 'white'
                         }}>
                             {ordersData.map((orderObj, index) => (
@@ -119,7 +114,7 @@ const ManageMoneyPage = () => {
                                     <div key={index}>
                                         <div style={{
                                             display: 'flex',
-                                            width: '70%',
+                                            width: '100%',
                                             justifyContent: 'space-between',
                                             border: '1px solid grey',
                                             padding: '.5rem 1rem',
@@ -138,7 +133,7 @@ const ManageMoneyPage = () => {
                                         <div style={{
                                             borderRadius: '0 0 .5rem .5rem',
                                             border: '1px solid grey',
-                                            width: '70%',
+                                            width: '100%',
                                             margin: '0 15%',
                                             padding: '0 0 0 5rem',
                                         }}>
@@ -162,6 +157,22 @@ const ManageMoneyPage = () => {
                                 </div>
                             ))}
                         </div>}
+                    <div style={{
+                        height: '10%',
+                        width: '100%',
+                        textAlign: 'center'
+                    }}>
+                        <button style={{
+                            border: 'none',
+                            borderRadius: '.5rem',
+                            backgroundColor: '#c53b57',
+                            color: 'white',
+                            padding: '.5rem 3rem',
+                            cursor: 'pointer',
+                        }} onClick={() => {
+                            setShow(false)
+                        }}>Đóng</button>
+                    </div>
                 </div>
             </div>}
             <h4 style={{
@@ -227,14 +238,19 @@ const ManageMoneyPage = () => {
                         margin: '2rem 0',
                         border: '1px solid grey',
                         borderRadius: '.5rem',
-                        backgroundColor: 'white'
+                        backgroundColor: 'white',
+                        padding: '.5rem',
+                        height: '37vh',
                     }}>
                         <h4 style={{
                             margin: '.2rem 2rem'
                         }}>Các đơn hàng </h4>
                         <div style={{
-                            width: '90%',
-                            margin: '.2rem 4%'
+                            width: '97%',
+                            margin: '.2rem 1rem',
+                            overflowY: 'auto',
+                            overflowX: 'hidden',
+                            height: '90%'
                         }}>
                             {order.length > 0 && order.map((or, index) => (
                                 <div key={index} style={{
@@ -246,7 +262,9 @@ const ManageMoneyPage = () => {
                                     backgroundColor: or.userRole === 1 ? '#FFA460' : '#eab676',
                                     width: '100%'
                                 }}>
-                                    <div>
+                                    <div style={{
+                                        width: '50%'
+                                    }}>
                                         <p><b>Ngày đặt:</b> {or.orderDate.split('T')[0]}</p>
                                         <p><b>Người đặt:</b> {or.userName}</p>
                                         <p><b>Tổng tiền:</b> {or.totalMoney}</p>
@@ -259,7 +277,8 @@ const ManageMoneyPage = () => {
                                         borderRadius: '.5rem',
                                         padding: '.5rem 3rem',
                                         height: '3rem',
-                                        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px'
+                                        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
+                                        width: '20%'
                                     }} onClick={() => GetAllOrdersID(or.orderId)}>Chi tiết</button>
                                     {or.orderStatus === 1 &&
                                         <>
@@ -270,7 +289,8 @@ const ManageMoneyPage = () => {
                                                 borderRadius: '.5rem',
                                                 padding: '.5rem 3rem',
                                                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
-                                                height: '3rem'
+                                                height: '3rem',
+                                                width: '20%'
                                             }} onClick={() => HandleAccept(or.orderId)}>Nhận</button>
                                             <button style={{
                                                 backgroundColor: '#c53b57',
@@ -279,7 +299,8 @@ const ManageMoneyPage = () => {
                                                 borderRadius: '.5rem',
                                                 padding: '.5rem 3rem',
                                                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
-                                                height: '3rem'
+                                                height: '3rem',
+                                                width: '20%'
                                             }} onClick={() => HandleCancel(or.orderId)}>Huỷ</button>
                                         </>
                                     }
@@ -291,7 +312,8 @@ const ManageMoneyPage = () => {
                                             borderRadius: '.5rem',
                                             padding: '.5rem 3rem',
                                             boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
-                                            height: '3rem'
+                                            height: '3rem',
+                                            width: '20%'
                                         }}>Đã nhận</button>
                                     }
                                     {or.orderStatus === 4 &&
@@ -302,7 +324,8 @@ const ManageMoneyPage = () => {
                                             borderRadius: '.5rem',
                                             padding: '.5rem 3rem',
                                             boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
-                                            height: '3rem'
+                                            height: '3rem',
+                                            width: '20%'
                                         }}>Đã giao</button>
                                     }
                                     {or.orderStatus === 7 &&
@@ -313,7 +336,8 @@ const ManageMoneyPage = () => {
                                             borderRadius: '.5rem',
                                             padding: '.5rem 3rem',
                                             boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
-                                            height: '3rem'
+                                            height: '3rem',
+                                            width: '20%'
                                         }}>Đã nhận hàng</button>
                                     }
                                     {or.orderStatus === 5 &&
@@ -324,7 +348,8 @@ const ManageMoneyPage = () => {
                                             borderRadius: '.5rem',
                                             padding: '.5rem 3rem',
                                             boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
-                                            height: '3rem'
+                                            height: '3rem',
+                                            width: '20%'
                                         }}>Đã Huỷ</button>
                                     }
                                 </div>
@@ -365,7 +390,7 @@ const ManageMoneyPage = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

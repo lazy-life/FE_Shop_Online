@@ -67,7 +67,7 @@ function OrdersListPage() {
                 console.log(err);
             })
     }
-    
+
     const HandleDone = (id) => {
         axios.post(`${apiRoot}Status/${id}/7`)
             .then(res => {
@@ -120,28 +120,34 @@ function OrdersListPage() {
                     height: '90vh',
                     backgroundColor: 'white'
                 }}>
+                    <h5 style={{
+                        textAlign: 'center',
+                        marginBottom: '1.5rem'
+                    }}>Danh sách đơn hàng của bạn</h5>
+
                     {ordersData.map((orderObj, index) => (
                         <div style={{
-                            margin: '.5rem 0'
+                            margin: '.5rem 0',
                         }}>
                             <div key={index}>
                                 <div style={{
                                     display: 'flex',
-                                    width: '70%',
+                                    width: '80%',
                                     justifyContent: 'space-between',
                                     border: '1px solid grey',
                                     padding: '.5rem 1rem',
-                                    margin: '0 15%',
+                                    margin: '0 10%',
                                     borderRadius: '.5rem .5rem 0 0 ',
                                     backgroundColor: orderObj.orders.orderStatus === 5 ? '#ffa0ac' : '#b1d266'
                                 }}>
                                     <b>{new Date(orderObj.orders.orderDate).toLocaleDateString()}</b>
+                                    <b>{orderObj.orders.addressDetail}</b>
                                     {orderObj.orders.orderStatus === 1 && <b>Đã đặt</b>}
                                     {orderObj.orders.orderStatus === 3 && <b>Đang chuẩn bị hàng</b>}
                                     {orderObj.orders.orderStatus === 6 && <b>Đang giao</b>}
-                                    {orderObj.orders.orderStatus === 4 && <b>Đã giao</b>}
+                                    {/* {orderObj.orders.orderStatus === 4 && <b>Đã giao</b>} */}
                                     {orderObj.orders.orderStatus === 5 && <b>Đã Huỷ</b>}
-                                    <b>{orderObj.orders.addressDetail}</b>
+                                    {orderObj.orders.orderStatus === 7 && <b>Thành công</b>}
                                     {orderObj.orders.orderStatus === 1 && <button style={{
                                         border: 'none',
                                         backgroundColor: '#ff6075',
@@ -150,16 +156,17 @@ function OrdersListPage() {
                                     }} onClick={() => HandleCancel(orderObj.orders.orderId)}><b>Huỷ</b></button>}
                                     {orderObj.orders.orderStatus === 4 && <button style={{
                                         border: 'none',
-                                        backgroundColor: '#ff6075',
+                                        backgroundColor: '#2596be',
                                         borderRadius: '.5rem',
+                                        color: 'white',
                                         padding: '.5rem 2rem'
                                     }} onClick={() => HandleDone(orderObj.orders.orderId)}><b>Đã nhận hàng</b></button>}
                                 </div>
                                 <div style={{
                                     borderRadius: '0 0 .5rem .5rem',
                                     border: '1px solid grey',
-                                    width: '70%',
-                                    margin: '0 15%',
+                                    width: '80%',
+                                    margin: '0 10%',
                                     padding: '0 0 0 5rem',
                                 }}>
                                     {orderObj.orderDetails.map((detail, idx) => (
@@ -170,10 +177,18 @@ function OrdersListPage() {
                                                 padding: '.5rem 1rem',
                                                 color: 'black'
                                             }}>
-                                                <p>Product Name: {detail.productName}</p>
-                                                <p>Product Detail Name: {detail.productDetailName}</p>
-                                                <p>Amount: {detail.amount}</p>
-                                                <p>Total Money: {detail.totalMoney}</p>
+                                                <p style={{
+                                                    width: '35%'
+                                                }}><b>Sản phẩm:</b> {detail.productName}</p>
+                                                <p style={{
+                                                    width: '20%'
+                                                }}><b>Loại:</b> {detail.productDetailName}</p>
+                                                <p style={{
+                                                    width: '10%'
+                                                }}><b>Số lượng:</b> {detail.amount}</p>
+                                                <p style={{
+                                                    width: '15%'
+                                                }}><b>Tổng tiền:</b> {detail.totalMoney.toLocaleString('en-US')} VND</p>
                                             </div>
                                         </Link>
                                     ))}
